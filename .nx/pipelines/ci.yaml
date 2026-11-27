@@ -1,0 +1,12 @@
+triggers:
+  pull-requests:
+    event: PR
+    branches: ['main']
+
+workflows:
+  main:
+    runs-on: linux-small-js
+    steps:
+      - name: Slow step
+        script: |
+          for i in $(seq 1 5); do echo "minute $i"; sleep 60; done
