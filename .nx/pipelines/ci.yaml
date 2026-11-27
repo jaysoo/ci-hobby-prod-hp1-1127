@@ -1,21 +1,12 @@
-# yaml-language-server: $schema=https://cloud.nx.app/nx-cloud/static/schemas/workflow.schema.json
 triggers:
   pull-requests:
     event: PR
     branches: ['main']
-  pushes:
-    event: PUSH
-    branches: ['main']
 
 workflows:
   main:
-    runs-on: linux-large-js
-    # Tasks run on this one machine, which fits most workspaces.
-    # For a large workspace, uncomment workers to add 3 more machines like this one.
-    # They start with every run: large runs can finish sooner, and runs usually use more credits.
-    # https://nx.dev/docs/reference/nx-cloud/ci-config#jobsjobworkers
-    # workers: 3
+    runs-on: linux-small-js
     steps:
-      - name: Run affected tasks
+      - name: Slow step
         script: |
-          npx nx affected -t lint test build
+          for i in $(seq 1 5); do echo "minute $i"; sleep 60; done
